@@ -24,14 +24,8 @@ class _PdftoText extends State<PdftoText> {
     }
     setState(() {
       user = payload;
-      loggedin = !loggedin;
+      loggedin = true;
     });
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PdftoText(),
-      ),
-    );
   }
 
   @override
