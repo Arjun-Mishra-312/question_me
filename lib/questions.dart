@@ -5,3 +5,8 @@ List<String> flutterQuestion =
   "How do we create custom getters and setters, and what’s the advantage of doing so?","What are the 'async’ and 'await’ keywords for?","Last thoughts on Dart"
 ];
 
+List<String> pythonQuestion =
+[
+  
+];
+

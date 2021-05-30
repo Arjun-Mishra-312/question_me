@@ -1,7 +1,9 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 import 'package:pdf_text/pdf_text.dart';
+import 'package:question_me/video_recorder.dart';
 
 class PdftoText extends StatefulWidget {
   @override
@@ -12,7 +14,7 @@ class _PdftoText extends State<PdftoText> {
   PDFDoc? _pdfDoc;
   String _text = "";
 
-  bool _buttonsEnabled = true;
+
 
   @override
   void initState() {
@@ -21,42 +23,57 @@ class _PdftoText extends State<PdftoText> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-              child: Scaffold(
-            body: Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(10),
-          child: Column(
-            children: [
-              TextButton(
-                child: Text(
-                  "Pick PDF document",
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: TextButton.styleFrom(
-                    padding: EdgeInsets.all(5),
-                    backgroundColor: Colors.blueAccent),
-                onPressed: _pickPDFText,
+    return SafeArea(
+      child: Scaffold(
+          body: Container(
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          image: DecorationImage(
+              image: AssetImage("assets/rocket-image.jpg"), fit: BoxFit.cover),
+        ),
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Text(
+              "Question Me According To Me",
+              style: TextStyle(
+                  fontSize: 25, fontWeight: FontWeight.w600, letterSpacing: 0.6,fontFamily: GoogleFonts.robotoMono().fontFamily),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            Text(
+              "Choose your resume PDF to get started",
+              style: TextStyle(
+                  fontSize: 14, fontWeight: FontWeight.w600, letterSpacing: 0.6,fontFamily: GoogleFonts.robotoMono().fontFamily),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 10),
+            TextButton(
+              child: Text(
+                "Pick PDF document",
+                style: TextStyle(color: Colors.white,fontFamily: GoogleFonts.robotoMono().fontFamily),
               ),
-              TextButton(
-                child: Text(
-                  "Read whole document",
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: TextButton.styleFrom(
-                    padding: EdgeInsets.all(5),
-                    backgroundColor: Colors.blueAccent),
-                onPressed: _buttonsEnabled ? _readWholeDoc : () {},
-              ),
-              Spacer(),
-              Text(
-                _text
-              )
-            ],
-          ),
-        )),
-      ),
+              style: TextButton.styleFrom(
+                  padding: EdgeInsets.all(5),
+                  backgroundColor: Colors.blueAccent),
+              onPressed: _pickPDFText,
+            ),
+            // TextButton(
+            //   child: Text(
+            //     "Read whole document",
+            //     style: TextStyle(color: Colors.white),
+            //   ),
+            //   style: TextButton.styleFrom(
+            //       padding: EdgeInsets.all(5),
+            //       backgroundColor: Colors.blueAccent),
+            //   onPressed: _buttonsEnabled ? _readWholeDoc : () {},
+            // ),
+            // Spacer(),
+            // Text(_text)
+          ],
+        ),
+      )),
     );
   }
 
@@ -66,6 +83,7 @@ class _PdftoText extends State<PdftoText> {
     if (filePickerResult != null) {
       _pdfDoc = await PDFDoc.fromPath(filePickerResult.files.single.path!);
       setState(() {});
+      _readWholeDoc();
     }
   }
 
@@ -75,7 +93,6 @@ class _PdftoText extends State<PdftoText> {
       return;
     }
     setState(() {
-      _buttonsEnabled = false;
     });
 
     String text = await _pdfDoc!.text;
@@ -84,7 +101,13 @@ class _PdftoText extends State<PdftoText> {
     // print(rake.rank(text));
     setState(() {
       _text = text;
-      _buttonsEnabled = true;
     });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => MyHomePage(
+                text: _text,
+              )),
+    );
   }
 }

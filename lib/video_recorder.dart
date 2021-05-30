@@ -1,17 +1,19 @@
 import 'dart:io';
 import 'dart:async';
+import 'dart:math' as math;
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:question_me/questions.dart';
 import 'package:question_me/response_screen.dart';
 import 'package:video_player/video_player.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, this.title}) : super(key: key);
+  MyHomePage({Key? key, this.text}) : super(key: key);
 
-  final String? title;
+  final String? text;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -159,6 +161,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.orangeAccent.shade100,
+      statusBarColor: Colors.blueAccent.shade700,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarDividerColor: Colors.transparent,
+    ));
+    print(widget.text);
     String txt = ques[_currentPage];
     return SafeArea(
       child: Scaffold(
@@ -192,7 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "Question",
+                        "Questions",
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
@@ -259,11 +268,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: MediaQuery.of(context).size.height / 2,
                       ringColor: Colors.grey[300]!,
                       ringGradient: null,
-                      fillColor: Colors.purpleAccent[100]!,
-                      fillGradient: null,
-                      backgroundColor: Colors.purple[500],
+                      fillColor: Colors.greenAccent,
+                      fillGradient: SweepGradient(
+                        startAngle: 2.97 * math.pi / 2,
+                        endAngle: 7 * math.pi / 2,
+                        tileMode: TileMode.repeated,
+                        colors: [Colors.greenAccent,Colors.yellow, Colors.redAccent],
+                      ),
+                      backgroundColor: Colors.transparent,
                       backgroundGradient: null,
-                      strokeWidth: 20.0,
+                      strokeWidth: 10.0,
                       strokeCap: StrokeCap.round,
                       textStyle: TextStyle(
                           fontSize: 33.0,
