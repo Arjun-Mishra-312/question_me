@@ -98,12 +98,19 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     if (_controller == null) {
       return const Text(
-        'You have not yet recorded a video',style: TextStyle(fontWeight: FontWeight.w500, color: Color.fromRGBO(252, 168, 10, 1.0)),
+        'You have not yet recorded a video',
+        style: TextStyle(
+            fontWeight: FontWeight.w500,
+            color: Color.fromRGBO(252, 168, 10, 1.0)),
         textAlign: TextAlign.center,
       );
     }
     return Center(
-      child: Text('Your response has been recorded',style: TextStyle(fontWeight: FontWeight.w500,color: Colors.greenAccent.shade700),),
+      child: Text(
+        'Your response has been recorded',
+        style: TextStyle(
+            fontWeight: FontWeight.w500, color: Colors.greenAccent.shade700),
+      ),
     );
     // Padding(
     //   padding: const EdgeInsets.all(10.0),
@@ -211,9 +218,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             blurRadius: 25.0, // soften the shadow
                             spreadRadius: 3.0, //extend the shadow
                             offset: Offset(
-                              -4.0, // Move to right 10  horizontally
-                              -4.0 // Move to bottom 10 Vertically
-                            ),
+                                -4.0, // Move to right 10  horizontally
+                                -4.0 // Move to bottom 10 Vertically
+                                ),
                           )
                         ],
                       ),
@@ -221,27 +228,29 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            txt,style: TextStyle(fontSize: 16.5,fontWeight: FontWeight.w600),
+                            txt,
+                            style: TextStyle(
+                                fontSize: 16.5, fontWeight: FontWeight.w600),
                           ),
                           _previewVideo(),
+                          _currentPage == ques.length - 1
+                              ? ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ResponseScreen(
+                                          response: answers,
+                                          controller: _controller,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text('view your responses'))
+                              : Container(),
                         ],
                       ),
                     ),
-                    _currentPage == ques.length - 1
-                        ? ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ResponseScreen(
-                                    response: answers,
-                                    controller: _controller,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Text('view your responses'))
-                        : Container(),
                     CircularCountDownTimer(
                       duration: 45,
                       initialDuration: 0,

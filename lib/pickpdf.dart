@@ -22,39 +22,41 @@ class _PdftoText extends State<PdftoText> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-          body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextButton(
-              child: Text(
-                "Pick PDF document",
-                style: TextStyle(color: Colors.white),
+      home: SafeArea(
+              child: Scaffold(
+            body: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              TextButton(
+                child: Text(
+                  "Pick PDF document",
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.all(5),
+                    backgroundColor: Colors.blueAccent),
+                onPressed: _pickPDFText,
               ),
-              style: TextButton.styleFrom(
-                  padding: EdgeInsets.all(5),
-                  backgroundColor: Colors.blueAccent),
-              onPressed: _pickPDFText,
-            ),
-            TextButton(
-              child: Text(
-                "Read whole document",
-                style: TextStyle(color: Colors.white),
+              TextButton(
+                child: Text(
+                  "Read whole document",
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.all(5),
+                    backgroundColor: Colors.blueAccent),
+                onPressed: _buttonsEnabled ? _readWholeDoc : () {},
               ),
-              style: TextButton.styleFrom(
-                  padding: EdgeInsets.all(5),
-                  backgroundColor: Colors.blueAccent),
-              onPressed: _buttonsEnabled ? _readWholeDoc : () {},
-            ),
-            Spacer(),
-            Text(
-              _text
-            )
-          ],
-        ),
-      )),
+              Spacer(),
+              Text(
+                _text
+              )
+            ],
+          ),
+        )),
+      ),
     );
   }
 
