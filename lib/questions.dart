@@ -20,4 +20,8 @@ List<String> dsaQuestions = [
   
 ];
 
-var questions = {'flutter': flutterQuestions, 'python': pythonQuestions};
+List<String> pythonQuestion =
+[
+  
+];
+

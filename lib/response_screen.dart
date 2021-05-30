@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:question_me/video_player.dart';
 import 'package:video_player/video_player.dart';
@@ -49,11 +50,33 @@ class _ResponseScreenState extends State<ResponseScreen> {
 
   Widget video(int i) {
     if (_controller != null) {
-      return Column(
-        children: [
-          Text("These are your responses"),
-          AspectRatioVideo(_controller)
-        ],
+      return Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.5, 1.0],
+            colors: [Colors.blueAccent.shade700, Colors.orangeAccent.shade100],
+          ),
+        ),
+        child: Column(
+          children: [
+            Text(
+              "These your responses",
+              style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.6,
+                  fontFamily: GoogleFonts.robotoMono().fontFamily),
+              textAlign: TextAlign.center,
+            ),
+            Expanded(
+              child: Container(
+                child: AspectRatioVideo(_controller),
+              ),
+            ),
+          ],
+        ),
       );
     } else {
       _playVideo(widget.response![0]);
