@@ -1,16 +1,15 @@
-# question_me
+# Question_Me
 
-A new Flutter project.
+## Inspiration
+Due to Covid-19 pandemic, interview sessions are being held online. Well how will you prepare and check you preparation? Introducing **Question Me**, an app which help you prepare for your dream interview.
 
-## Getting Started
+## What it does?
 
-This project is a starting point for a Flutter application.
+* Upload resume, which is then parsed into text.
+* Keywords from text are extracted to form basic interview questions.
+* User gets 45 seconds to answer these questions one by one.
+* In the end, the user can see his attempt and review it properly.
 
-A few resources to get you started if this is your first Flutter project:
+## How we built it?
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The entire app was made on Flutter, with the help of Sawo Labs.
