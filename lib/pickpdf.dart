@@ -5,6 +5,8 @@ import 'dart:async';
 import 'package:pdf_text/pdf_text.dart';
 import 'package:question_me/video_recorder.dart';
 import 'package:sawo/sawo.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 class PdftoText extends StatefulWidget {
   @override
@@ -96,9 +98,8 @@ class _PdftoText extends State<PdftoText> {
                 child: ElevatedButton(
                   onPressed: () {
                     Sawo(
-                      apiKey: "a9b60e57-6c15-4b8e-b987-6fc3200ce4c5",
-                      secretKey:
-                          "60b3b1bfc3c4efd4eaf3e7cdFj3XHbJ2Xb0wKgZgUdgILM5s",
+                      apiKey: dotenv.env['APIKEY'],
+                      secretKey: dotenv.env['SECRETKEY']
                     ).signIn(
                       context: context,
                       identifierType: 'phone_number_sms',
