@@ -20,7 +20,6 @@ class ResponseScreen extends StatefulWidget {
 class _ResponseScreenState extends State<ResponseScreen> {
   VideoPlayerController? _controller;
   VideoPlayerController? _toBeDisposed;
-
   Future<void> _playVideo(PickedFile? file) async {
     if (file != null && mounted) {
       await _disposeVideoController();
@@ -37,17 +36,7 @@ class _ResponseScreenState extends State<ResponseScreen> {
       await controller.setLooping(false);
       await controller.play();
       setState(() {});
-    } else {
-      setState(() {
-        _controller = null;
-      });
     }
-  }
-
-  @override
-  void dispose() {
-    _disposeVideoController();
-    super.dispose();
   }
 
   Future<void> _disposeVideoController() async {
@@ -81,7 +70,6 @@ class _ResponseScreenState extends State<ResponseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // PickedFile ans = widget.response![_currentPage];
     print(
         'This is the respones from the response screen and it should show somehting${widget.response![0]}');
     print('This os the controlleer responese ples check${widget.controller}');
@@ -91,12 +79,6 @@ class _ResponseScreenState extends State<ResponseScreen> {
       ),
       body: PageView(
           controller: pagecontroller,
-          onPageChanged: (_) {
-            setState(() {
-              _currentPage = _currentPage + 1;
-              _controller = null;
-            });
-          },
           children: List<Widget>.generate(
             5,
             (_) {
