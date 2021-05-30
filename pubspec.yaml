@@ -31,6 +31,12 @@ dependencies:
   image_picker: ^0.7.5+3
   video_player: ^2.1.4
   circular_countdown_timer: ^0.2.0
+  file_picker: ^3.0.0
+  pdf_text: ^0.5.0
+  pdf: ^3.0.1
+  uuid: ^3.0.1
+  optional: ^6.0.0-nullsafety.0
+  rake: ^1.0.1
 
 dev_dependencies:
   flutter_test:
