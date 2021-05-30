@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:question_me/sawo_integration.dart';
 import 'package:question_me/video_recorder.dart';
 import 'pickpdf.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     ));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PdftoText(),
+      home: SawoLogin(),
     );
   }
 }
