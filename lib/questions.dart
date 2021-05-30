@@ -20,8 +20,4 @@ List<String> dsaQuestions = [
   
 ];
 
-List<String> pythonQuestion =
-[
-  
-];
 

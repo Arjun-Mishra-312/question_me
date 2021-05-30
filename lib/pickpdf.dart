@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 import 'package:pdf_text/pdf_text.dart';
 import 'package:question_me/video_recorder.dart';
+import 'package:sawo/sawo.dart';
 
 class PdftoText extends StatefulWidget {
   @override
@@ -13,6 +14,25 @@ class PdftoText extends StatefulWidget {
 class _PdftoText extends State<PdftoText> {
   PDFDoc? _pdfDoc;
   String _text = "";
+  bool loggedin = false;
+
+  // user payload
+  String? user;
+  void payloadCallback(context, payload) {
+    if (payload == null || (payload is String && payload.length == 0)) {
+      payload = "Login Failed :(";
+    }
+    setState(() {
+      user = payload;
+      loggedin = !loggedin;
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PdftoText(),
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -44,40 +64,59 @@ class _PdftoText extends State<PdftoText> {
               textAlign: TextAlign.center,
             ),
             Spacer(),
-            Text(
-              "Choose your resume PDF to get started",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.6,
-                  fontFamily: GoogleFonts.robotoMono().fontFamily),
-              textAlign: TextAlign.center,
-            ),
-            Spacer(flex: 2),
-            TextButton(
+            Visibility(
+              visible: true,
               child: Text(
-                "Upload resume",
+                loggedin
+                    ? "Choose your resume PDF to get started"
+                    : "Login with phone number to get started",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.6,
                     fontFamily: GoogleFonts.robotoMono().fontFamily),
+                textAlign: TextAlign.center,
               ),
-              style: TextButton.styleFrom(
-                  padding: EdgeInsets.all(5),
-                  backgroundColor: Colors.blueAccent),
-              onPressed: _pickPDFText,
             ),
-            // TextButton(
-            //   child: Text(
-            //     "Read whole document",
-            //     style: TextStyle(color: Colors.white),
-            //   ),
-            //   style: TextButton.styleFrom(
-            //       padding: EdgeInsets.all(5),
-            //       backgroundColor: Colors.blueAccent),
-            //   onPressed: _buttonsEnabled ? _readWholeDoc : () {},
-            // ),
+            Spacer(flex: 2),
+            Visibility(
+              visible: loggedin,
+              child: TextButton(
+                child: Text(
+                  "Upload resume",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontFamily: GoogleFonts.robotoMono().fontFamily),
+                ),
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.all(5),
+                    backgroundColor: Colors.blueAccent),
+                onPressed: _pickPDFText,
+              ),
+            ),
+            Visibility(
+              visible: !loggedin,
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Sawo(
+                      apiKey: "a9b60e57-6c15-4b8e-b987-6fc3200ce4c5",
+                      secretKey:
+                          "60b3b1bfc3c4efd4eaf3e7cdFj3XHbJ2Xb0wKgZgUdgILM5s",
+                    ).signIn(
+                      context: context,
+                      identifierType: 'phone_number_sms',
+                      callback: payloadCallback,
+                    );
+                  },
+                  child: Text('Phone Login',
+                      style: GoogleFonts.robotoMono(
+                          fontSize: 20, color: Colors.white)),
+                ),
+              ),
+            ),
             Spacer(
               flex: 18,
             ),
@@ -113,9 +152,10 @@ class _PdftoText extends State<PdftoText> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => MyHomePage(
-                text: _text,
-              )),
+        builder: (context) => MyHomePage(
+          text: _text,
+        ),
+      ),
     );
   }
 }
