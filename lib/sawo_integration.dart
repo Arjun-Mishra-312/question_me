@@ -8,11 +8,6 @@ class SawoLogin extends StatefulWidget {
 }
 
 class _SawoLoginState extends State<SawoLogin> {
-  // Sawo configuration object
-  var config = {
-    "apiKey": "a9b60e57-6c15-4b8e-b987-6fc3200ce4c5",
-    "secretKey": "60b3b1bfc3c4efd4eaf3e7cdFj3XHbJ2Xb0wKgZgUdgILM5s",
-  };
   // user payload
   String? user;
   void payloadCallback(context, payload) {
@@ -30,9 +25,9 @@ class _SawoLoginState extends State<SawoLogin> {
     );
   }
 
-  void toogleState(typedata, text) => setState(() {
-        config[typedata] = text;
-      });
+  login(){
+    
+  }
 
   @override
   Widget build(BuildContext context) {
