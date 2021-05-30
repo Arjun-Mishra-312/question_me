@@ -23,39 +23,38 @@ class _PdftoText extends State<PdftoText> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SafeArea(
-              child: Scaffold(
-            body: Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(10),
-          child: Column(
-            children: [
-              TextButton(
-                child: Text(
-                  "Pick PDF document",
-                  style: TextStyle(color: Colors.white),
+        child: Scaffold(
+          body: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(10),
+            child: Column(
+              children: [
+                TextButton(
+                  child: Text(
+                    "Pick PDF document",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: TextButton.styleFrom(
+                      padding: EdgeInsets.all(5),
+                      backgroundColor: Colors.blueAccent),
+                  onPressed: _pickPDFText,
                 ),
-                style: TextButton.styleFrom(
-                    padding: EdgeInsets.all(5),
-                    backgroundColor: Colors.blueAccent),
-                onPressed: _pickPDFText,
-              ),
-              TextButton(
-                child: Text(
-                  "Read whole document",
-                  style: TextStyle(color: Colors.white),
+                TextButton(
+                  child: Text(
+                    "Read whole document",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: TextButton.styleFrom(
+                      padding: EdgeInsets.all(5),
+                      backgroundColor: Colors.blueAccent),
+                  onPressed: _buttonsEnabled ? _readWholeDoc : () {},
                 ),
-                style: TextButton.styleFrom(
-                    padding: EdgeInsets.all(5),
-                    backgroundColor: Colors.blueAccent),
-                onPressed: _buttonsEnabled ? _readWholeDoc : () {},
-              ),
-              Spacer(),
-              Text(
-                _text
-              )
-            ],
+                Spacer(),
+                // Text(_text)
+              ],
+            ),
           ),
-        )),
+        ),
       ),
     );
   }
@@ -80,8 +79,6 @@ class _PdftoText extends State<PdftoText> {
 
     String text = await _pdfDoc!.text;
     print(text);
-    // final rake = Rake();
-    // print(rake.rank(text));
     setState(() {
       _text = text;
       _buttonsEnabled = true;

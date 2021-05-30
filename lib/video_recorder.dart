@@ -155,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  List<String> ques = flutterQuestion;
+  List<String> ques = flutterQuestions;
 
   @override
   Widget build(BuildContext context) {
