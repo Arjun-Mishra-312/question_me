@@ -14,8 +14,6 @@ class _PdftoText extends State<PdftoText> {
   PDFDoc? _pdfDoc;
   String _text = "";
 
-
-
   @override
   void initState() {
     super.initState();
@@ -38,21 +36,32 @@ class _PdftoText extends State<PdftoText> {
             Text(
               "Question Me According To Me",
               style: TextStyle(
-                  fontSize: 25, fontWeight: FontWeight.w600, letterSpacing: 0.6,fontFamily: GoogleFonts.robotoMono().fontFamily),
+                  color: Colors.white,
+                  fontSize: 32,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.6,
+                  fontFamily: GoogleFonts.robotoMono().fontFamily),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20),
+            Spacer(),
             Text(
               "Choose your resume PDF to get started",
               style: TextStyle(
-                  fontSize: 14, fontWeight: FontWeight.w600, letterSpacing: 0.6,fontFamily: GoogleFonts.robotoMono().fontFamily),
+                  color: Colors.white,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.6,
+                  fontFamily: GoogleFonts.robotoMono().fontFamily),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10),
+            Spacer(flex: 2),
             TextButton(
               child: Text(
-                "Pick PDF document",
-                style: TextStyle(color: Colors.white,fontFamily: GoogleFonts.robotoMono().fontFamily),
+                "Upload resume",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontFamily: GoogleFonts.robotoMono().fontFamily),
               ),
               style: TextButton.styleFrom(
                   padding: EdgeInsets.all(5),
@@ -69,7 +78,9 @@ class _PdftoText extends State<PdftoText> {
             //       backgroundColor: Colors.blueAccent),
             //   onPressed: _buttonsEnabled ? _readWholeDoc : () {},
             // ),
-            // Spacer(),
+            Spacer(
+              flex: 18,
+            ),
             // Text(_text)
           ],
         ),
@@ -92,8 +103,7 @@ class _PdftoText extends State<PdftoText> {
     if (_pdfDoc == null) {
       return;
     }
-    setState(() {
-    });
+    setState(() {});
 
     String text = await _pdfDoc!.text;
     print(text);

@@ -5,6 +5,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:question_me/questions.dart';
 import 'package:question_me/response_screen.dart';
@@ -99,9 +100,10 @@ class _MyHomePageState extends State<MyHomePage> {
       return retrieveError;
     }
     if (_controller == null) {
-      return const Text(
+      return Text(
         'You have not yet recorded a video',
-        style: TextStyle(
+        style: GoogleFonts.robotoMono(
+            fontSize: 18,
             fontWeight: FontWeight.w500,
             color: Color.fromRGBO(252, 168, 10, 1.0)),
         textAlign: TextAlign.center,
@@ -202,44 +204,47 @@ class _MyHomePageState extends State<MyHomePage> {
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
                         "Questions",
-                        style: TextStyle(fontSize: 20),
+                        style: GoogleFonts.robotoMono(
+                            fontSize: 23, color: Colors.white),
                       ),
                     ),
                     Container(
                       height: 300,
                       margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                      padding: EdgeInsets.all(15),
+                      // padding: EdgeInsets.symmetric(vertical: 2),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.transparent,
                         borderRadius: BorderRadius.circular(25),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade700,
-                            blurRadius: 25.0, // soften the shadow
-                            spreadRadius: 3.0, //extend the shadow
-                            offset: Offset(
-                              4.0, // Move to right 10  horizontally
-                              4.0, // Move to bottom 10 Vertically
-                            ),
-                          ),
-                          BoxShadow(
-                            color: Colors.grey.shade700,
-                            blurRadius: 25.0, // soften the shadow
-                            spreadRadius: 3.0, //extend the shadow
-                            offset: Offset(
-                                -4.0, // Move to right 10  horizontally
-                                -4.0 // Move to bottom 10 Vertically
-                                ),
-                          )
-                        ],
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: Colors.grey.shade700,
+                        //     blurRadius: 15.0, // soften the shadow
+                        //     spreadRadius: 1.0, //extend the shadow
+                        //     offset: Offset(
+                        //       2.0, // Move to right 10  horizontally
+                        //       2.0, // Move to bottom 10 Vertically
+                        //     ),
+                        //   ),
+                        //   BoxShadow(
+                        //     color: Colors.grey.shade700,
+                        //     blurRadius: 25.0, // soften the shadow
+                        //     spreadRadius: 3.0, //extend the shadow
+                        //     offset: Offset(
+                        //         -4.0, // Move to right 10  horizontally
+                        //         -4.0 // Move to bottom 10 Vertically
+                        //         ),
+                        //   )
+                        // ],
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
                             txt,
-                            style: TextStyle(
-                                fontSize: 16.5, fontWeight: FontWeight.w600),
+                            style: GoogleFonts.robotoMono(
+                                fontSize: 23,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.1),
                           ),
                           _previewVideo(),
                           _currentPage == ques.length - 1
@@ -255,7 +260,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                     );
                                   },
-                                  child: Text('view your responses'))
+                                  child: Text('view your responses',
+                                      style:
+                                          GoogleFonts.robotoMono(fontSize: 15)))
                               : Container(),
                         ],
                       ),
@@ -273,7 +280,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         startAngle: 2.97 * math.pi / 2,
                         endAngle: 7 * math.pi / 2,
                         tileMode: TileMode.repeated,
-                        colors: [Colors.greenAccent,Colors.yellow, Colors.redAccent],
+                        colors: [
+                          Colors.greenAccent,
+                          Colors.yellow,
+                          Colors.redAccent
+                        ],
                       ),
                       backgroundColor: Colors.transparent,
                       backgroundGradient: null,
