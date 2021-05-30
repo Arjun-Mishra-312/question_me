@@ -1,7 +1,7 @@
 # Question_Me
 
 ## Inspiration
-Due to Covid-19 pandemic, interview sessions are being held online. Well how will you prepare and check you preparation? Introducing **Question Me**, an app which help you prepare for your dream interview.
+Due to Covid-19 pandemic, interview sessions are being held online. Well how will you prepare and check your preparation? Introducing **Question Me**, an app which helps you prepare for your dream interview.
 
 ## What it does?
 
