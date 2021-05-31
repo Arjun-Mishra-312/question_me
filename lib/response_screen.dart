@@ -95,20 +95,19 @@ class _ResponseScreenState extends State<ResponseScreen> {
     print(
         'This is the respones from the response screen and it should show somehting${widget.response![0]}');
     print('This os the controlleer responese ples check${widget.controller}');
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Your Response'),
+    return SafeArea(
+          child: Scaffold(
+        body: PageView(
+            controller: pagecontroller,
+            children: List<Widget>.generate(
+              5,
+              (_) {
+                return video(
+                  _currentPage,
+                );
+              },
+            )),
       ),
-      body: PageView(
-          controller: pagecontroller,
-          children: List<Widget>.generate(
-            5,
-            (_) {
-              return video(
-                _currentPage,
-              );
-            },
-          )),
     );
   }
 }

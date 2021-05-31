@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // await controller.initialize();
       // await controller.setLooping(false);
       // await controller.play();
-      setState(() {});
+      setState(() {_currentPage == 5 ? _currentPage = _currentPage - 1 : _currentPage = _currentPage;});
     }
   }
 
@@ -106,7 +106,6 @@ class _MyHomePageState extends State<MyHomePage> {
             fontSize: 18,
             fontWeight: FontWeight.w500,
             color: Color.fromRGBO(252, 168, 10, 1.0)),
-        textAlign: TextAlign.center,
       );
     }
     return Center(
@@ -184,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           physics: NeverScrollableScrollPhysics(),
           children: List<Widget>.generate(5, (_) {
-            return Center(
+            return Expanded(
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -197,116 +196,119 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Questions",
-                        style: GoogleFonts.robotoMono(
-                            fontSize: 23, color: Colors.white),
+                child: SingleChildScrollView(
+                  physics: NeverScrollableScrollPhysics(),
+                                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          "Questions",
+                          style: GoogleFonts.robotoMono(
+                              fontSize: 23, color: Colors.white),
+                        ),
                       ),
-                    ),
-                    Container(
-                      height: 300,
-                      margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                      // padding: EdgeInsets.symmetric(vertical: 2),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(25),
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Colors.grey.shade700,
-                        //     blurRadius: 15.0, // soften the shadow
-                        //     spreadRadius: 1.0, //extend the shadow
-                        //     offset: Offset(
-                        //       2.0, // Move to right 10  horizontally
-                        //       2.0, // Move to bottom 10 Vertically
-                        //     ),
-                        //   ),
-                        //   BoxShadow(
-                        //     color: Colors.grey.shade700,
-                        //     blurRadius: 25.0, // soften the shadow
-                        //     spreadRadius: 3.0, //extend the shadow
-                        //     offset: Offset(
-                        //         -4.0, // Move to right 10  horizontally
-                        //         -4.0 // Move to bottom 10 Vertically
-                        //         ),
-                        //   )
-                        // ],
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            txt,
-                            style: GoogleFonts.robotoMono(
-                                fontSize: 23,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 0.1),
-                          ),
-                          _previewVideo(),
-                          _currentPage == ques.length - 1
-                              ? ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ResponseScreen(
-                                          response: answers,
-                                          controller: _controller,
+                      Container(
+                        height: 300,
+                        margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                        // padding: EdgeInsets.symmetric(vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(25),
+                          // boxShadow: [
+                          //   BoxShadow(
+                          //     color: Colors.grey.shade700,
+                          //     blurRadius: 15.0, // soften the shadow
+                          //     spreadRadius: 1.0, //extend the shadow
+                          //     offset: Offset(
+                          //       2.0, // Move to right 10  horizontally
+                          //       2.0, // Move to bottom 10 Vertically
+                          //     ),
+                          //   ),
+                          //   BoxShadow(
+                          //     color: Colors.grey.shade700,
+                          //     blurRadius: 25.0, // soften the shadow
+                          //     spreadRadius: 3.0, //extend the shadow
+                          //     offset: Offset(
+                          //         -4.0, // Move to right 10  horizontally
+                          //         -4.0 // Move to bottom 10 Vertically
+                          //         ),
+                          //   )
+                          // ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              txt,
+                              style: GoogleFonts.robotoMono(
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 0.1),
+                            ),
+                            _previewVideo(),
+                            _currentPage == ques.length - 1
+                                ? ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ResponseScreen(
+                                            response: answers,
+                                            controller: _controller,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                  child: Text('view your responses',
-                                      style:
-                                          GoogleFonts.robotoMono(fontSize: 15)))
-                              : Container(),
-                        ],
+                                      );
+                                    },
+                                    child: Text('view your responses',
+                                        style:
+                                            GoogleFonts.robotoMono(fontSize: 15)))
+                                : Container(),
+                          ],
+                        ),
                       ),
-                    ),
-                    CircularCountDownTimer(
-                      duration: 45,
-                      initialDuration: 0,
-                      controller: CountDownController(),
-                      width: MediaQuery.of(context).size.width / 2,
-                      height: MediaQuery.of(context).size.height / 2,
-                      ringColor: Colors.grey[300]!,
-                      ringGradient: null,
-                      fillColor: Colors.greenAccent,
-                      fillGradient: SweepGradient(
-                        startAngle: 2.97 * math.pi / 2,
-                        endAngle: 7 * math.pi / 2,
-                        tileMode: TileMode.repeated,
-                        colors: [
-                          Colors.greenAccent,
-                          Colors.yellow,
-                          Colors.redAccent
-                        ],
-                      ),
-                      backgroundColor: Colors.transparent,
-                      backgroundGradient: null,
-                      strokeWidth: 10.0,
-                      strokeCap: StrokeCap.round,
-                      textStyle: TextStyle(
-                          fontSize: 33.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                      textFormat: CountdownTextFormat.S,
-                      isReverse: false,
-                      isReverseAnimation: false,
-                      isTimerTextShown: true,
-                      autoStart: true,
-                      onStart: () {
-                        print('Countdown Started');
-                      },
-                      onComplete: () {
-                        print('Countdown Ended');
-                      },
-                    )
-                  ],
+                      CircularCountDownTimer(
+                        duration: 45,
+                        initialDuration: 0,
+                        controller: CountDownController(),
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: MediaQuery.of(context).size.height / 2,
+                        ringColor: Colors.grey[300]!,
+                        ringGradient: null,
+                        fillColor: Colors.greenAccent,
+                        fillGradient: SweepGradient(
+                          startAngle: 2.97 * math.pi / 2,
+                          endAngle: 7 * math.pi / 2,
+                          tileMode: TileMode.repeated,
+                          colors: [
+                            Colors.greenAccent,
+                            Colors.yellow,
+                            Colors.redAccent
+                          ],
+                        ),
+                        backgroundColor: Colors.transparent,
+                        backgroundGradient: null,
+                        strokeWidth: 10.0,
+                        strokeCap: StrokeCap.round,
+                        textStyle: TextStyle(
+                            fontSize: 33.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                        textFormat: CountdownTextFormat.S,
+                        isReverse: false,
+                        isReverseAnimation: false,
+                        isTimerTextShown: true,
+                        autoStart: true,
+                        onStart: () {
+                          print('Countdown Started');
+                        },
+                        onComplete: () {
+                          print('Countdown Ended');
+                        },
+                      )
+                    ],
+                  ),
                 ),
               ),
             );
